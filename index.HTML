@@ -1,55 +1,63 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>딴길연구소 부루마블</title>
+  <meta charset="UTF-8" />
+  <title>딴길 럭키드로우</title>
   <style>
-    body {
-      text-align: center;
-      font-family: 'Pretendard', sans-serif;
-      background-color: #fefefe;
-      margin: 0;
-      padding: 30px;
-    }
-    img {
-      max-width: 90%;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    button {
-      margin-top: 20px;
-      padding: 15px 30px;
-      font-size: 20px;
-      background-color: #ffd700;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    #result {
-      margin-top: 20px;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    a {
-      display: block;
-      margin-top: 10px;
-      font-size: 16px;
-      color: #555;
-    }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
   </style>
 </head>
 <body>
-  <h1>🎲 딴길연구소 실험판</h1>
-  <img src="your_board_image_url_here" alt="딴길 부루마블 보드" />
-  <br>
-  <button onclick="rollDice()">주사위 굴리기!</button>
-  <div id="result"></div>
-  <a href="https://notion.so/your-result-page-link" target="_blank">결과표 보러가기 →</a>
+  <h2>🎲 딴길 럭키드로우 🎲</h2>
+
+  <div>
+    <label for="codeInput">참여번호 입력:</label>
+    <input type="text" id="codeInput" />
+    <button onclick="checkChance()">기회 확인</button>
+  </div>
+
+  <div id="chanceDisplay" style="margin: 1em 0;"></div>
+
+  <button id="rollBtn" onclick="rollDice()" disabled>주사위 굴리기</button>
+
+  <div id="diceResult" style="font-size: 2em; margin-top: 1em;"></div>
 
   <script>
-    function rollDice() {
-      const n = Math.floor(Math.random() * 12) + 1;
-      document.getElementById('result').innerText = `🧭 당신의 실험 결과는... ${n}번 칸!`;
+    let currentCode = "";
+    let currentChance = 0;
+
+    async function checkChance() {
+      const code = document.getElementById("codeInput").value;
+      if (!code) return alert("번호를 입력해주세요!");
+
+      // Google Apps Script 주소로 요청
+      const res = await fetch(`YOUR_SCRIPT_URL_HERE?code=${code}`);
+      const data = await res.json();
+
+      if (data.error) {
+        document.getElementById("chanceDisplay").innerText = "❌ 유효하지 않은 번호입니다.";
+        document.getElementById("rollBtn").disabled = true;
+        return;
+      }
+
+      currentCode = code;
+      currentChance = data.chance;
+      document.getElementById("chanceDisplay").innerText = `🎯 남은 기회: ${currentChance}회`;
+      document.getElementById("rollBtn").disabled = currentChance <= 0;
+    }
+
+    async function rollDice() {
+      if (currentChance <= 0) return;
+
+      const roll = Math.floor(Math.random() * 6) + 1;
+      document.getElementById("diceResult").innerText = `🎲 ${roll}`;
+
+      currentChance -= 1;
+      document.getElementById("chanceDisplay").innerText = `🎯 남은 기회: ${currentChance}회`;
+      document.getElementById("rollBtn").disabled = currentChance <= 0;
+
+      // 기회 차감 업데이트 요청
+      await fetch(`YOUR_SCRIPT_URL_HERE?code=${currentCode}&use=1`);
     }
   </script>
 </body>
