@@ -1,0 +1,64 @@
+{\rtf1\ansi\ansicpg949\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="ko">\
+<head>\
+  <meta charset="UTF-8">\
+  <title>\uc0\u46388 \u44600 \u50672 \u44396 \u49548  \u48512 \u47336 \u47560 \u48660 </title>\
+  <style>\
+    body \{\
+      text-align: center;\
+      font-family: 'Pretendard', sans-serif;\
+      background-color: #fefefe;\
+      margin: 0;\
+      padding: 30px;\
+    \}\
+    img \{\
+      max-width: 90%;\
+      border-radius: 10px;\
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);\
+    \}\
+    button \{\
+      margin-top: 20px;\
+      padding: 15px 30px;\
+      font-size: 20px;\
+      background-color: #ffd700;\
+      border: none;\
+      border-radius: 10px;\
+      cursor: pointer;\
+    \}\
+    #result \{\
+      margin-top: 20px;\
+      font-size: 22px;\
+      font-weight: bold;\
+    \}\
+    a \{\
+      display: block;\
+      margin-top: 10px;\
+      font-size: 16px;\
+      color: #555;\
+    \}\
+  </style>\
+</head>\
+<body>\
+  <h1>\uc0\u55356 \u57266  \u46388 \u44600 \u50672 \u44396 \u49548  \u49892 \u54744 \u54032 </h1>\
+  <img src="your_board_image_url_here" alt="\uc0\u46388 \u44600  \u48512 \u47336 \u47560 \u48660  \u48372 \u46300 " />\
+  <br>\
+  <button onclick="rollDice()">\uc0\u51452 \u49324 \u50948  \u44404 \u47532 \u44592 !</button>\
+  <div id="result"></div>\
+  <a href="https://notion.so/your-result-page-link" target="_blank">\uc0\u44208 \u44284 \u54364  \u48372 \u47084 \u44032 \u44592  \u8594 </a>\
+\
+  <script>\
+    function rollDice() \{\
+      const n = Math.floor(Math.random() * 12) + 1;\
+      document.getElementById('result').innerText = `\uc0\u55358 \u56813  \u45817 \u49888 \u51032  \u49892 \u54744  \u44208 \u44284 \u45716 ... $\{n\}\u48264  \u52856 !`;\
+    \}\
+  </script>\
+</body>\
+</html>\
+}
