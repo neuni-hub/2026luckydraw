@@ -31,7 +31,7 @@
       if (!code) return alert("번호를 입력해주세요!");
 
       // Google Apps Script 주소로 요청
-      const res = await fetch(`https://script.google.com/macros/s/AKfycbz-j4X1mkx4yR6yu6ir6NUasAw9gs0AoJF_dRhInICqHWlqwiOCO8TG6YpeH253N9vBzg?code=${code}`);
+      const res = await fetch(`https://script.google.com/macros/s/AKfycbz-j4X1mkx4yR6yu6ir6NUasAw9gs0AoJF_dRhInICqHWlqwiOCO8TG6YpeH253N9vBzg/exec?code=${code}`);
       const data = await res.json();
 
       if (data.error) {
