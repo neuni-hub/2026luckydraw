@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.banner img {
+  width: 800px;       /* 항상 800px */
+  max-width: 800px;   /* 화면이 커져도 늘어나지 않음 */
+  height: auto;       /* 비율 유지 */
+  display: block;
+  margin: 0 auto;
+}
+
+.game-container {
+  margin-top: 40px;
+}
+
+.dice img {
+  width: 150px;
+  height: 150px;
+  margin: 20px auto;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #4cafef;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3a9edb;
+}
+
