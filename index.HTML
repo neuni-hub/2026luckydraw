@@ -1,26 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <title>딴길 럭키드로우</title>
   <style>
-    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+
+    /* 상단 배너 */
+    .banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+
+    .input-group {
+      margin: 20px 0;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 200px;
+      margin-right: 5px;
+    }
+
+    button {
+      padding: 8px 14px;
+      font-size: 16px;
+      background-color: #4cafef;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #3a9edb;
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    #chanceDisplay {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #diceResult {
+      font-size: 2em;
+      margin-top: 1em;
+    }
   </style>
 </head>
 <body>
+  <!-- 상단 배너 -->
+  <header class="banner">
+    <img src="https://drive.google.com/uc?export=view&id=1K7Fahp-vPwafNTOrZAMcYifh7DMt7yKr" alt="배너 이미지" />
+  </header>
+
+  <!-- 타이틀 -->
   <h2>🎲 딴길 럭키드로우 🎲</h2>
 
-  <div>
+  <!-- 참여번호 입력 -->
+  <div class="input-group">
     <label for="codeInput">참여번호 입력:</label>
     <input type="text" id="codeInput" />
     <button onclick="checkChance()">기회 확인</button>
   </div>
 
+  <!-- 남은 기회 표시 -->
   <div id="chanceDisplay" style="margin: 1em 0;"></div>
 
+  <!-- 주사위 굴리기 버튼 -->
   <button id="rollBtn" onclick="rollDice()" disabled>주사위 굴리기</button>
 
-  <div id="diceResult" style="font-size: 2em; margin-top: 1em;"></div>
+  <!-- 주사위 결과 -->
+  <div id="diceResult"></div>
 
   <script>
     let currentCode = "";
@@ -30,7 +96,6 @@
       const code = document.getElementById("codeInput").value;
       if (!code) return alert("번호를 입력해주세요!");
 
-      // Google Apps Script 주소로 요청
       const res = await fetch(`https://script.google.com/macros/s/AKfycbz-j4X1mkx4yR6yu6ir6NUasAw9gs0AoJF_dRhInICqHWlqwiOCO8TG6YpeH253N9vBzg/exec?code=${code}`);
       const data = await res.json();
 
@@ -56,7 +121,6 @@
       document.getElementById("chanceDisplay").innerText = `🎯 남은 기회: ${currentChance}회`;
       document.getElementById("rollBtn").disabled = currentChance <= 0;
 
-      // 기회 차감 업데이트 요청
       await fetch(`https://script.google.com/macros/s/AKfycbz-j4X1mkx4yR6yu6ir6NUasAw9gs0AoJF_dRhInICqHWlqwiOCO8TG6YpeH253N9vBzg/exec?code=${currentCode}&use=1`);
     }
   </script>
